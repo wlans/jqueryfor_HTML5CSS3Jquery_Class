@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html laug="en">
+<head>
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="jsfortravelwebsite.js"></script>
+<script src="jqueryui/external/jquery/jquery.js"></script>
+<script src="jqueryui/jquery-ui.js"></script>
+
+
+
+</head>
+
+<body>
+ <div class="container">
+	<h1> Welcome to Booking.com! 3.0 </h1>
+	<div class="container">
+	<div id="errorForForm">
+	</div>
+	<form id="costform" method="post" onsubmit="bookingCalcDisplay(this); return false;">
+		<label>Full Name:</label> 
+		<input type="text" name="fullName" placeholder="Full Name" required>	<br>
+
+		<label>Destination:</label>
+		<select id="destinationCityid" name="destinationCity">
+		</select> <br>
+
+		Nationality:
+		<label class="radio-inline">
+		<input type="radio" name="nationality" id="inlineRadio1" value="USA" checked>USA
+		</label>
+		<label class="radio-inline">
+		<input type="radio" name="nationality" id="inlineRadio2" value="Canada">Canada
+		</label>	
+		<label class="radio-inline">
+		<input type="radio" name="nationality" id="inlineRadio3" value="Mexico">Mexico
+		</label>
+		<label class="radio-inline">	
+		<input type="radio" name="nationality" id="inlineRadio4" value="Other">Other
+		</label>
+
+		<br>
+		<label>Number of days traveling:</label>
+		<input type="number" name="daysTraveling" value="1" min="1" max="365" required>	<br> <br>
+
+		<label>First Class Travel:</label>
+		<input type="checkbox" value="400" name="firstClasstravel">
+
+
+		<br>
+		<label>Travelling With Spouse:</label>
+		<input type="checkbox" name="spouseTraveling">
+
+		<br> <br>
+
+	</form>
+</div> <!-- /container -->
+<br>
+
+	<div id="results">
+	</div>
+	 </div> <!-- /container -->
+
+
+</body>
+</html>
