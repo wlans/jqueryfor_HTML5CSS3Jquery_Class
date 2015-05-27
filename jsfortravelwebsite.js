@@ -4,11 +4,55 @@ $(function() {
   		bookingCalcDisplay();
 		});
 
+		$( "select" ).change(function() {
+  		bookingCalcDisplay();
+		});
+
 		$.getJSON( "data.json", function( data ) {
   		$.each( data, function( key, val ) {
-    		$('#destinationCityid').append("<option value='" + val + "'>" + key + "<?option>");
+    		$('#destinationCityid').append("<option value='" + val + "'>" + key + "</option>");
     	});
   	});	
+
+
+  	  $( "#from" ).datepicker({
+    altField: "#alternate",
+    altFormat: "DD, d MM, yy",
+    minDate: 0,
+    maxDate: "+60D",
+    onSelect: function(selected) {
+      calcDiff();
+      bookingCalcDisplay();
+    }
+  });
+
+  $( "#to" ).datepicker({
+    altField: "#alternate1",
+    altFormat: "DD, d MM, yy",
+    minDate: 1,
+    maxDate:"+60D",
+    onSelect: function(selected) {
+      $("#from").datepicker("option","maxDate", selected);
+      calcDiff();
+      bookingCalcDisplay();
+    }
+  });
+
+  function calcDiff() {
+    var date1 = $('#from').datepicker('getDate');
+    var date2 = $('#to').datepicker('getDate');
+    var diff = 0;
+    $('#datesbetween').empty();
+    if (date1 && date2) {
+      diff = Math.floor((date2.getTime() - date1.getTime()) / 86400000);
+        for(var d = date1.getTime(); d <= date2.getTime(); d = d + 86400000){
+   
+        }
+    }
+    $('#daysTraveling').val(diff);
+  }
+
+
 });
 
 function bookingCalcDisplay () {
@@ -21,9 +65,16 @@ function bookingCalcDisplay () {
 	 var spouseTraveling = form.spouseTraveling.checked;
 	 var resultsDIVtochange = document.getElementById("results");
 	 var errorForForm = document.getElementById("errorForForm");
-	 resultsDIVtochange.innerHTML = "Hi, " + fullName + " you are traveling to " + destinationCity + " and your booking cost is " + costOfbooking(destinationCity,daysTraveling,firstClasstravel,spouseTraveling) + " dollars. " + passportNeeded(destinationCity,nationality) + extraTraveloptions(spouseTraveling,firstClasstravel);
-	
-	
+
+	 if(validation(costOfbooking (destinationCity,daysTraveling,firstClasstravel,spouseTraveling)) === true) {
+
+	 	resultsDIVtochange.innerHTML = "Hi, " + fullName + " you are traveling to " + destinationCity + " and your booking cost is " + costOfbooking(destinationCity,daysTraveling,firstClasstravel,spouseTraveling) + " dollars. " + passportNeeded(destinationCity,nationality) + extraTraveloptions(spouseTraveling,firstClasstravel);
+
+	 	} else if (validation(costOfbooking (destinationCity,daysTraveling,firstClasstravel,spouseTraveling)) === false) {
+
+	 	resultsDIVtochange.innerHTML = "Error, Cost can not be 0";
+
+	 	};
 };
 
 function costOfbooking (destinationCity,daysTraveling,firstClasstravel,spouseTraveling) {
@@ -82,9 +133,16 @@ function extraTraveloptions (spouseTraveling,firstClasstravel) {
 	return extraTraveloptionsvar; 
 };
 
-function validation (fullName,daysTraveling) {
-	var reqExpForLettersValidtion = /^[a-zA-Z]+$/;
-	if (reqExpForLettersValidtion.test(fullName) && !isNaN(daysTraveling)) {
-		return true;
-	}
+function validation (cost) {
+	if (cost > 0) {
+		return true
+	} else if (cost > 0) {
+			return false
+	};
 };
+
+// DatePicker
+
+$(document).ready(function() {
+
+});
