@@ -79,16 +79,13 @@ function bookingCalcDisplay () {
 
 function costOfbooking (destinationCity,daysTraveling,firstClasstravel,spouseTraveling) {
 	var form = document.getElementById("costform");
-	var dayCostforMiamiandMeixco = form.destinationCity.value;
-	var dayCostforNewYorkandLosAngeles = form.destinationCity.value;
+	var dayCost = form.destinationCity.value;
 	var totalCostforTrip = 0;
 	var firstClasstravelCost = 400;
 	var spouseTravelingmultiplier = 2;
 
-	if (destinationCity === "Miami" || destinationCity === "Mexico City") {
-		totalCostforTrip += daysTraveling * dayCostforMiamiandMeixco
-	} else if (destinationCity === "New York" || destinationCity === "Los Angeles") {
-		totalCostforTrip += daysTraveling * dayCostforNewYorkandLosAngeles
+	if (destinationCity !== "") {
+		totalCostforTrip += daysTraveling * dayCost
 	} else {
 		totalCostforTrip === null;
 		return "ERROR! No city provided"
